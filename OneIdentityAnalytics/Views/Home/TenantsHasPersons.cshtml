@@ -1,0 +1,28 @@
+﻿@model OneIdentityAnalyticsShared.Models.TenantsAssignedToPerson
+@{
+    var PersonCentralAccount= Model.Person.CentralAccount;
+    var UIDPerson = Model.Person.UID_Person;
+    
+}
+<div class="toolbar">
+    <a id="create-workspace-button" class="btn btn-primary" asp-action="OnboardTenant">
+        <i class="fa fa-user-plus"></i>
+        Assign tenant
+    </a>
+</div>
+    <table class="table table-bordered table-striped" id="Table">
+    <thead class="thead-dark">
+        <tr>
+            
+            <th style="text-align:center">Tenant Name</th>
+            <th style="text-align:center">Remove</th>
+          </tr>
+    </thead>
+    @foreach (var t in Model.Tenants)
+    {
+<tr>
+    
+    <td>@t.tenant.CCC_Name</td>
+   <td style="text-align:center"><a href="../RemoveTenantHasPerson/?UID_CCCTenantsHasPersons=@t.UID_CCCTenantsHasPersons&UID_Person=@Model.Person.UID_Person" class="nav nav-link"><i class="fa fa-remove"></i></a></td>
+</tr>}
+</table>
