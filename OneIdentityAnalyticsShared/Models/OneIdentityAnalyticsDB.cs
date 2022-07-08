@@ -35,14 +35,11 @@ namespace OneIdentityAnalyticsShared.Models
         public string UID_CCCTenantsHasPersons { get; set; }
         public string CCC_UIDTenant { get; set; }
         public string CCC_UIDPerson { get; set; }
+        public string XObjectKey { get; set; }
+        
         
     }
-    public class TenantsHasPersonsUIDCCC
-    {
-         [Key]
-        public string UID_CCCTenantsHasPersons { get; set; }
-    }
-
+  
     public class Person
     {
         [Key] 

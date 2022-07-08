@@ -6,6 +6,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+		<PackageReference Include="Microsoft.Azure.Management.Graph.RBAC.Fluent" Version="1.38.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.4">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

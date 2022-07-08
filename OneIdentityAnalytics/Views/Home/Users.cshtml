@@ -26,7 +26,7 @@
   @foreach (var user in Model) {
 <tr>
   <td>@user.LoginId</td>
-  @*<td>@user.UserName</td>*@
+  <td>@user.UserName</td>
   <td>@user.LastLogin.ToString("g")</td>
   <td>@(!string.IsNullOrEmpty(user.TenantName) ? user.TenantName : Html.Raw("<i style='color:darkred'>unassigned</i>"))</td>
   <td>@user.CanEdit</td>

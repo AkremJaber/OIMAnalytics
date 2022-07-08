@@ -105,32 +105,6 @@ namespace OneIdentityAnalytics.Services
                 Token = embedToken
             };
         }
-        //public async Task<EmbeddedReportViewModel> GetDashboard(Guid WorkspaceId, Guid DashboardId)
-        //{
-
-        //    PowerBIClient pbiClient = GetPowerBiClient();
-
-        //    // call to Power BI Service API to get embedding data
-        //    var dashboard = await pbiClient.Dashboards.GetDashboardAsync(WorkspaceId, DashboardId);
-
-        //    //var dashboard = await pbiClient.Reports.GetReportInGroupAsync(WorkspaceId, ReportId);
-
-        //    // generate read-only embed token for the report
-        //    var datasetId = report.DatasetId;
-        //    var tokenRequest = new GenerateTokenRequest(TokenAccessLevel.View, datasetId);
-        //    var embedTokenResponse = await pbiClient.Reports.GenerateTokenAsync(WorkspaceId, ReportId, tokenRequest);
-        //    var embedToken = embedTokenResponse.Token;
-
-        //    // return report embedding data to caller
-        //    return new EmbeddedDashboardViewModel
-        //    {
-        //        ReportId = report.Id.ToString(),
-        //        EmbedUrl = report.EmbedUrl,
-        //        Name = report.Name,
-        //        Token = embedToken
-        //    };
-        //}
-
         public Dataset GetDataset(PowerBIClient pbiClient, Guid WorkspaceId, string DatasetName)
         {
             var datasets = pbiClient.Datasets.GetDatasetsInGroup(WorkspaceId).Value;

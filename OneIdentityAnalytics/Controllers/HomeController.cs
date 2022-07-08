@@ -11,6 +11,7 @@ using OneIdentityAnalyticsShared.Services;
 using OneIdentityAnalytics.Models;
 using OneIdentityAnalytics.Services;
 
+
 namespace OneIdentityAnalytics.Controllers
 {
 
@@ -27,12 +28,12 @@ namespace OneIdentityAnalytics.Controllers
             this.AppOwnsDataDBService = AppOwnsDataDBService;
         }
 
-        //[AllowAnonymous]
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
-        //[Authorize(Roles ="Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult Tenants()
         {
             var model = AppOwnsDataDBService.GetTenants();
@@ -51,7 +52,6 @@ namespace OneIdentityAnalytics.Controllers
             public string TenantName { get; set; }
             public string UID_CCCTenants { get; set; }
             public string XObjectKey { get; set; }
-
             public string SuggestedDatabase { get; set; }
             public List<SelectListItem> DatabaseOptions { get; set; }
             public string SuggestedAppIdentity { get; set; }
@@ -166,7 +166,7 @@ namespace OneIdentityAnalytics.Controllers
             };
             return View(model);
         }
-
+        //edit
         [HttpPost]
         public IActionResult EditUser(User user)
         {
@@ -180,6 +180,49 @@ namespace OneIdentityAnalytics.Controllers
         {
             public List<SelectListItem> TenantOptions { get; set; }
         }
+        //public class AssignTenantToPersonModel
+        //{
+        //    public List<SelectListItem> TenantOptions { get; set; }
+        //    public Person person { get; set; }
+        //}
+
+        public class AssigningTenantToPerson
+        {
+            public List<SelectListItem> TenantOptions { get; set; }
+            public Person person { get; set; }
+           // public PowerBiTenant tenant { get; set; }
+        }
+        
+        public IActionResult AssignTenantToPerson(string UID_Person,string UID_Tenant)
+        {
+
+            var ccc = System.Guid.NewGuid().ToString();
+            var xobj = "<Key><T>CCCTenantsHasPersons</T><P>" + ccc + "</P></Key>";
+            var tenant = new TenantsHasPersons
+            {
+                CCC_UIDPerson = UID_Person,
+                UID_CCCTenantsHasPersons = ccc,
+                XObjectKey = xobj,
+            };
+            //PowerBiTenant pbi = AppOwnsDataDBService.GetTenantByUID(UID_Tenant);
+            Person p = AppOwnsDataDBService.GetPersonByUID(UID_Person);
+            var model = new AssigningTenantToPerson
+            {  // tenant = pbi,
+                person = p,
+                TenantOptions = this.AppOwnsDataDBService.GetTenants().Select(tenant => new SelectListItem
+                {
+                    Text = tenant.CCC_Name,
+                    Value = tenant.UID_CCCTenants,
+                }).ToList(),
+            };
+            return View(model);
+        }
+        //[HttpPost]
+        //public IActionResult AssignTenantToPerson(Person person)
+        //{
+        //    var model = AppOwnsDataDBService.
+
+        //}
 
         public IActionResult CreateUser()
         {

@@ -4,12 +4,7 @@
     var UIDPerson = Model.Person.UID_Person;
     
 }
-<div class="toolbar">
-    <a id="create-workspace-button" class="btn btn-primary" asp-action="OnboardTenant">
-        <i class="fa fa-user-plus"></i>
-        Assign tenant
-    </a>
-</div>
+
     <table class="table table-bordered table-striped" id="Table">
     <thead class="thead-dark">
         <tr>
@@ -26,3 +21,9 @@
    <td style="text-align:center"><a href="../RemoveTenantHasPerson/?UID_CCCTenantsHasPersons=@t.UID_CCCTenantsHasPersons&UID_Person=@Model.Person.UID_Person" class="nav nav-link"><i class="fa fa-remove"></i></a></td>
 </tr>}
 </table>
+    <div class="toolbar">
+        <a id="create-workspace-button" class="btn btn-primary" href="../AssignTenantToPerson/?UID_Person=@UIDPerson">
+            <i class="fa fa-user-plus"></i>
+            Assign New Tenant To @PersonCentralAccount
+        </a>
+    </div>

@@ -85,7 +85,12 @@ namespace OneIdentityAnalyticsShared.Services
             var user = dbContext.Users.Where(user => user.LoginId == LoginId).First();
             return user;
         }
-     
+        //public Person GetPerson(string UID_Person)
+        //{
+        //    var person = dbContext.Person.Where(person => person.UID_Person == UID_Person).First();
+        //    return person;
+        //}
+
         public IList<Person> GetPersons()
         {
             return dbContext.Person
@@ -101,11 +106,16 @@ namespace OneIdentityAnalyticsShared.Services
                    // .OrderByDescending(person => user.LastLogin)
                    .ToList();
         }
+        public Person GetPersonByUID(string UID_Person)
+        {
+            return (Person)dbContext.Person.Where(person => person.UID_Person == UID_Person).FirstOrDefault();
+        }
+
         public TenantsAssignedToPerson GetTenantsHasPersons(string UID_Person)
         {
 
             var TenantsUIDSList = dbContext.CCCTenantsHasPersons.Where(person => person.CCC_UIDPerson == UID_Person).ToList();
-            Person p = (Person)dbContext.Person.Where(person => person.UID_Person == UID_Person).FirstOrDefault();
+            Person p = GetPersonByUID(UID_Person);
             TenantsAssignedToPerson tap = new TenantsAssignedToPerson();
             
             List<PowerBITenantInTenantsHasPersons> persontenants = new List<PowerBITenantInTenantsHasPersons>();
@@ -157,6 +167,23 @@ namespace OneIdentityAnalyticsShared.Services
             dbContext.SaveChanges();
             return user;
         }
+        //public Person UpdatePerson(Person currentPerson)
+        //{
+        //    var persons = dbContext.Person.Where(person => person.UID_Person == currentPerson.UID_Person);
+        //    Person person;
+        //    if (persons.Count() > 0)
+        //    {
+        //        person = persons.First();
+        //    }
+        //    else
+        //    {
+        //        person = new Person();
+        //    }
+            
+        //    person.TenantName = currentUser.TenantName;
+        //    dbContext.SaveChanges();
+        //    return user;
+        //}
 
         public User CreateUser(User newUser)
         {
